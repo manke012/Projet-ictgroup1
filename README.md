@@ -1,5 +1,5 @@
 # Projet-ictgroup-sarlu
 
-   # PROJET : GESTION COMPTABLE DE L'ONG GUINEE ECOLOGIE
+   # PROJET : COMPTABILITE DE GUINEE ECOLOGIE
 
      GUINEE ECOLOGIE est une ONG dans le domaine de l'environnement
