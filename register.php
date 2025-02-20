@@ -1,5 +1,7 @@
 <?php
+
 require 'index.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -10,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute(['username' => $username, 'password' => $password, 'email' => $email]);
 
     echo "Inscription réussie!";
-	header('Location: connect.php');
+    header('Location: connect.php');
     exit();
 }
 ?>

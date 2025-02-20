@@ -1,7 +1,7 @@
 <?php
-session_start();
+
 require 'index.php';
-include 'index.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'] = $user['username'];
         header('Location: Accueil.html');
         exit();
-    } 
-}
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <button type="submit" class="btn btn-primary w-100">Se connecter</button></br></br>
 			<a href="register.php">S'inscrire</a>
-			
         </form>
     </div>
 </div>

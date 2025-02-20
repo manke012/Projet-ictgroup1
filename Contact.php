@@ -1,13 +1,12 @@
 <?php
 
-session_start();
 require 'index.php';
-include 'index.php';
+
 
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Ma@224mkante036";
 $dbname = "gestion_comptable";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -43,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $emailErr = "Format d'email invalide";
         }
     }
-	
 	// Validation du sujet
     if (empty($_POST["sujet"])) {
         $sujetErr = "Le sujet est requis";
@@ -109,8 +107,7 @@ function test_input($data) {
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="Accueil.html">Accueil</a>
-                </li>
-                
+                </li> 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Structure
