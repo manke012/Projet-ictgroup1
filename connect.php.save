@@ -1,42 +1,23 @@
 <?php
-session_start();
+session
+require 'index.php';
 
-// Connexion à la base de données
-$host = 'localhost';
-$dbname = 'gestion_comptable';
-$username = 'root';
-$password = 'Ma@224mkante036';
 
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-// Récupération des données du formulaire
-$username = $_POST['username'];
-$email = $_POST['email'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash du mot de passe
+    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = :username");
+    $stmt->execute(['username' => $username]);
+    $user = $stmt->fetch();
 
-// Insertion des données dans la base de données
-$sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(':username', $username);
-$stmt->bindParam(':email', $email);
-$stmt->bindParam(':password', $password);
-
-if ($stmt->execute()) {
-    // Démarrer une session pour l'utilisateur
-    $_SESSION['username'] = $username;
-    $_SESSION['email'] = $email;
-
-    // Redirection vers une autre page
-    header('Location: connect.php');
-    exit();
-} else {
-    echo "Erreur lors de l'inscription.";
-}
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        header('Location: Accueil.html');
+        exit();
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -76,21 +57,18 @@ if ($stmt->execute()) {
             <!-- Remplacez "logo.png" par le chemin de votre logo -->
             <img src="logo.jpg" alt="Logo">
         </div>
-        <h2 class="text-center mb-4">Inscription</h2>
+        <h2 class="text-center mb-4">Connexion</h2>
         <form method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label" style="display: inline-block; width: 100px;">Username:</label>
-                <input type="text" class="form-control" id="username" name="username" style="display: inline-block; width: 235px;"  placeholder="Entrez votre nom utilisateur">
-            </div>
-			<div class="mb-3">
-                <label for="email" class="form-label" style="display: inline-block; width: 100px;">Email::</label>
-                <input type="email" class="form-control" id="eamil" name="email" style="display: inline-block; width: 235px;"  placeholder="Entrez votre email">
+                <input type="text" class="form-control" id="username" name="username" style="display: inline-block; width: 235px;"  placeholder="Entrez votre email">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label" style="display: inline-block; width: 100px;">Mot de passe:</label>
                 <input type="password" class="form-control" id="password" name="password" style="display: inline-block; width: 235px;" type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
             </div>
-            <button type="submit" class="btn btn-primary w-100">S'inscrire</button></br></br>
+            <button type="submit" class="btn btn-primary w-100">Se connecter</button></br></br>
+			<a href="register.php">S'inscrire</a>
         </form>
     </div>
 </div>

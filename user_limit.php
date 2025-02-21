@@ -1,9 +1,9 @@
 <?php
 
 
+session_start();
 require 'index.php';
-
-
+include 'index.php';
 
 // Connexion à la base de données
 $pdo = new PDO('mysql:host=localhost;dbname=gestion_comptable', 'root', '');

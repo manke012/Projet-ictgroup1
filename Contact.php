@@ -1,7 +1,8 @@
 <?php
 
+session_start();
 require 'index.php';
-
+include 'index.php';
 
 // Connexion à la base de données
 $servername = "localhost";

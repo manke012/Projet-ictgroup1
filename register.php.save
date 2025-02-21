@@ -1,11 +1,12 @@
 <?php
+
 session_start();
 
 // Connexion à la base de données
 $host = 'localhost';
-$dbname = 'gestion_comptable';
+$dbname = 'my';
 $username = 'root';
-$password = 'Ma@224mkante036';
+$password = '';
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -91,6 +92,8 @@ if ($stmt->execute()) {
                 <input type="password" class="form-control" id="password" name="password" style="display: inline-block; width: 235px;" type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
             </div>
             <button type="submit" class="btn btn-primary w-100">S'inscrire</button></br></br>
+			
+			
         </form>
     </div>
 </div>
